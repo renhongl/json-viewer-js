@@ -1,0 +1,151 @@
+/* html, body{
+    width: 100%;
+    height: 100%;
+} */
+
+
+.add-height{
+    height: auto !important;
+}
+
+.rotate90{
+    transform: rotate(0deg) !important;
+}
+
+/* for light them */
+
+.jv-light-symbol{
+    color: #9c9c9c;
+    font-weight: bold;
+}
+
+.jv-light-con{
+    background: #fff;
+    color: #76b2ff;
+    font-family: monospace;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.jv-light-current {
+    line-height: 30px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.jv-light-left {
+    display: inline-block;
+}
+
+.jv-light-rightString {
+    display: inline-block;
+    color: #13a060;
+}
+
+.jv-light-rightBoolean {
+    display: inline-block;
+    color: #257be4;
+}
+
+.jv-light-rightNumber {
+    display: inline-block;
+    color: #f53232;
+}
+
+.jv-light-rightNull {
+    display: inline-block;
+    color: #caca17;
+}
+
+.jv-light-rightObj {
+    display: block !important;
+    overflow: hidden;
+    height: 0;
+}
+
+.jv-light-folder {
+    width: 0px;
+    display: inline-block;
+    margin-left: -20px;
+    text-align: center;
+    cursor: pointer;
+    height: 0px;
+    border: 4px solid transparent;
+    border-top: 8px solid #484d50;
+    position: absolute;
+    top: 10px;
+    transform-origin: 25% center;
+    transform: rotate(-90deg);
+}
+
+
+
+
+/* for dark theme */
+
+.jv-dark-con{
+    background: #232323;
+    color: #97b9e4;
+    font-family: monospace;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.jv-dark-symbol{
+    color: #eaeaea;
+    font-weight: bold;
+}
+
+.jv-dark-current {
+    line-height: 30px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.jv-dark-left {
+    display: inline-block;
+}
+
+.jv-dark-rightString {
+    display: inline-block;
+    color: #13a060;
+}
+
+.jv-dark-rightBoolean {
+    display: inline-block;
+    color: #257be4;
+}
+
+.jv-dark-rightNumber {
+    display: inline-block;
+    color: #f53232;
+}
+
+.jv-dark-rightNull {
+    display: inline-block;
+    color: #caca17;
+}
+
+.jv-dark-rightObj {
+    display: block !important;
+    overflow: hidden;
+    height: 0;
+}
+
+.jv-dark-folder {
+    width: 0px;
+    display: inline-block;
+    margin-left: -20px;
+    text-align: center;
+    cursor: pointer;
+    height: 0px;
+    border: 5px solid transparent;
+    border-top: 10px solid #fff;
+    position: absolute;
+    top: 10px;
+    transform: rotate(-90deg);
+    transform-origin: 25% center;
+}
+

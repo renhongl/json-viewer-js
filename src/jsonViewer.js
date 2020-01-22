@@ -1,5 +1,10 @@
 
 
+/**
+ * @author renhongl
+ * @email liangrenhong2017@gmail.com
+ * @desc This lib is for render a pretty json data on browser
+ */
 
 require('./style.css');
 
@@ -119,12 +124,6 @@ JsonViewer.prototype.render = function () {
 JsonViewer.prototype.toggleItem = function (ele, target) {
     ele.classList.toggle('add-height');
     target.classList.toggle('rotate90');
-}
-
-JsonViewer.prototype.addStyles = function (ele, style) {
-    this.forEach(style, function (val, key) {
-        ele.style[key] = val;
-    });
 }
 
 JsonViewer.prototype.createElement = function (type) {

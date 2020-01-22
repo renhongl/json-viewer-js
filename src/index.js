@@ -1,8 +1,6 @@
 
 import JsonViewer from './jsonViewer';
 
-
-
 const testJson = `{
   "example1": [
       {

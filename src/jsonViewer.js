@@ -5,9 +5,6 @@ require('./style.css');
 
 const toString = Object.prototype.toString;
 
-const jsonStart = /^\[|\{/;
-const jsonEnd = /\]|\}$/;
-
 function isString(val) {
     return typeof val === 'string';
 }
@@ -38,7 +35,9 @@ function isNull(val) {
 
 function JsonViewer(options) {
     const defaults = {
-        theme: 'light'
+        theme: 'light',
+        container: null,
+        data: '{}',
     };
     this.options = Object.assign(defaults, options);
     if (isNull(options.container)) {
@@ -54,10 +53,13 @@ JsonViewer.prototype.render = function () {
     let indent = 0;
     let parent = this.options.container;
     parent.setAttribute('class', theme + 'con');
-    if (!jsonStart.test(data) || !jsonEnd.test(data)) {
+    let dataObj;
+    try {
+        dataObj = JSON.parse(data);
+    } catch (error) {
         throw new Error('It is not a json format');
     }
-    let dataObj = JSON.parse(data);
+    
     if (!isArray(dataObj)) {
         dataObj = [dataObj];
     }
@@ -69,7 +71,7 @@ JsonViewer.prototype.render = function () {
                 let right = self.createElement('div');
 
                 current.style.marginLeft = indent * 2 + 'px';
-                left.innerHTML = key + '<span class="jv-light-symbol">&nbsp;:&nbsp;</span>';
+                left.innerHTML = key + '<span class="jv-'+theme+'-symbol">&nbsp;:&nbsp;</span>';
                 current.appendChild(left);
                 current.appendChild(right);
                 parent.appendChild(current);
@@ -86,7 +88,6 @@ JsonViewer.prototype.render = function () {
                     } else {
                         right.setAttribute('class', theme + 'rightString');
                     }
-                    console.log(val);
                     right.innerText = val;
                 }
                 if (isObject(val) || isArray(val)) {

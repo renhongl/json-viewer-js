@@ -1,8 +1,9 @@
 {
   "name": "json-viewer-js",
-  "version": "1.0.0",
-  "description": "Open source JSON viewer",
+  "version": "1.0.1",
+  "description": "One pretty json viewer by javascript",
   "main": "./lib/json-viewer.min.js",
+  "homepage": "https://github.com/renhongl/json-viewer-js",
   "scripts": {
     "test": "jest",
     "build": "webpack --env.production",
@@ -10,7 +11,7 @@
     "start": "webpack-dev-server",
     "dev": "webpack"
   },
-  "keywords": ["json", "viewer"],
+  "keywords": ["json", "viewer", "view"],
   "author": "renhongl",
   "license": "MIT",
   "devDependencies": {

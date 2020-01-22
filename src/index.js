@@ -4,32 +4,26 @@ import JsonViewer from './jsonViewer';
 
 
 const testJson = `{
-    "employees": {
-      "employee": [
-        {
-          "id": "1",
-          "male": true,
-          "name": null,
-          "children": null,
+  "example1": [
+      {
+          "name": "test01",
           "age": 18,
-          "firstName": "Tom",
-          "lastName": "Cruise",
-          "photo": "https://jsonformatter.org/img/tom-cruise.jpg"
-        },
-        {
-          "id": "2",
-          "firstName": "Maria",
-          "lastName": "Sharapova",
-          "photo": "https://jsonformatter.org/img/Maria-Sharapova.jpg"
-        },
-        {
-          "id": "3",
-          "firstName": "Robert",
-          "lastName": "Downey Jr.",
-          "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg"
-        }
-      ]
-    }
-  }`
+          "gender": 0,
+          "student": true,
+          "children": null
+      },
+      {
+          "name": "test02",
+          "age": 19,
+          "gender": 1,
+          "student": true,
+          "children": null
+      }
+  ],
+  "example2": {
+      "friuts": ["apple", "grape", "jujube", "pear"],
+      "transport": ["taxi", "bus", "metro", "plane", "train"]
+  }
+}`
 
 new JsonViewer({container: document.body, data: testJson, theme: 'light'});

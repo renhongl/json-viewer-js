@@ -51,74 +51,91 @@ function JsonViewer(options) {
     this.render();
 }
 
+JsonViewer.prototype.renderRight = function(theme, right, val) {
+    if (isNumber(val)) {
+        right.setAttribute('class', theme + 'rightNumber');
+    } else if (isBoolean(val)) {
+        right.setAttribute('class', theme + 'rightBoolean');
+    } else if (val === 'null') {
+        right.setAttribute('class', theme + 'rightNull');
+    } else {
+        right.setAttribute('class', theme + 'rightString');
+    }
+    right.innerText = val;
+}
+
+JsonViewer.prototype.renderChildren = function(theme, key, val, right, indent, left) {
+    let self = this;
+    let folder = this.createElement('span');
+    folder.setAttribute('class', theme + 'folder');
+    folder.onclick = function (e) {
+        let nextSibling = e.target.parentNode.nextSibling;
+        self.toggleItem(nextSibling, e.target);
+    }
+    let len = 0;
+    let isObj = false;
+    if (isObject(val)) {
+        len = Object.keys(val).length;
+        isObj = true;
+    } else {
+        len = val.length;
+    }
+    left.innerHTML = isObj ? key + '&nbsp;&nbsp{' + len + '}' : key + '&nbsp;&nbsp[' + len + ']';
+    left.prepend(folder);
+    right.setAttribute('class', theme + 'rightObj');
+    self.parse(val, right, indent + 2.5, theme);
+}
+  
+JsonViewer.prototype.parse = function(dataObj, parent, indent, theme) {
+    const self = this;
+    this.forEach(dataObj, function (val, key) {
+        const { left, right } = self.createItem(indent, theme, parent, key);
+        if (typeof val !== 'object') {
+            self.renderRight(theme, right, val);
+        } else {
+            self.renderChildren(theme, key, val, right, indent, left);
+        }
+    });
+}
+
+JsonViewer.prototype.createItem = function(indent, theme, parent, key) {
+    let current = this.createElement('div');
+    let left = this.createElement('div');
+    let right = this.createElement('div');
+
+    current.style.marginLeft = indent * 2 + 'px';
+    left.innerHTML = key + '<span class="jv-' + theme + '-symbol">&nbsp;:&nbsp;</span>';
+    current.appendChild(left);
+    current.appendChild(right);
+    parent.appendChild(current);
+    current.setAttribute('class', theme + 'current');
+    left.setAttribute('class', theme + 'left');
+    return {
+        left,
+        right,
+        current,
+    };
+}
+
 JsonViewer.prototype.render = function () {
     let data = this.options.data;
-    let self = this;
     let theme = 'jv-' + this.options.theme + '-';
-    let indent = 0;
+    let indent = 2.5;
     let parent = this.options.container;
-    parent.setAttribute('class', theme + 'con');
+    let key = 'object';
     let dataObj;
+    
+    parent.setAttribute('class', theme + 'con');
     try {
         dataObj = JSON.parse(data);
     } catch (error) {
         throw new Error('It is not a json format');
     }
-    
-    if (!isArray(dataObj)) {
-        dataObj = [dataObj];
+    if (isArray(dataObj)) {
+        key = 'array';
     }
-    function parse(arr, parent, indent) {
-        self.forEach(arr, function (obj) {
-            self.forEach(obj, function (val, key) {
-                let current = self.createElement('div');
-                let left = self.createElement('div');
-                let right = self.createElement('div');
-
-                current.style.marginLeft = indent * 2 + 'px';
-                left.innerHTML = key + '<span class="jv-'+theme+'-symbol">&nbsp;:&nbsp;</span>';
-                current.appendChild(left);
-                current.appendChild(right);
-                parent.appendChild(current);
-                current.setAttribute('class', theme + 'current');
-                left.setAttribute('class', theme + 'left');
-
-                if (typeof val !== 'object') {
-                    if (isNumber(val)) {
-                        right.setAttribute('class', theme + 'rightNumber');
-                    } else if (isBoolean(val)) {
-                        right.setAttribute('class', theme + 'rightBoolean');
-                    } else if (val === 'null') {
-                        right.setAttribute('class', theme + 'rightNull');
-                    } else {
-                        right.setAttribute('class', theme + 'rightString');
-                    }
-                    right.innerText = val;
-                }
-                if (isObject(val) || isArray(val)) {
-                    let folder = self.createElement('span');
-                    folder.setAttribute('class', theme + 'folder');
-                    folder.onclick = function (e) {
-                        let nextSibling = e.target.parentNode.nextSibling;
-                        self.toggleItem(nextSibling, e.target);
-                    }
-                    let len = 0;
-                    let isObj = false;
-                    if (isObject(val)) {
-                        len = Object.keys(val).length;
-                        isObj = true;
-                    } else {
-                        len = val.length;
-                    }
-                    left.innerHTML = isObj ? key + '&nbsp;&nbsp{' + len + '}' : key + '&nbsp;&nbsp[' + len + ']';
-                    left.prepend(folder);
-                    right.setAttribute('class', theme + 'rightObj');
-                    parse([val], right, indent + 5);
-                }
-            });
-        });
-    }
-    parse(dataObj, parent, indent);
+    const { left, right } = this.createItem(indent, theme, parent, key);
+    this.renderChildren(theme, key, dataObj, right, indent, left);
 }
 
 JsonViewer.prototype.toggleItem = function (ele, target) {

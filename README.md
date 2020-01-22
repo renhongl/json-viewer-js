@@ -4,7 +4,7 @@ One pretty json viewer by javascript
 
 Home page: [json-viewer-js](https://github.com/renhongl/json-viewer-js)
 
-## How to use
+## Example
 
 ```js
 import JsonViewer from './jsonViewer';
@@ -36,6 +36,15 @@ new JsonViewer({container: document.body, data: testJson, theme: 'light'});
 
 ```
 
+## Output Example
+
+Light theme
+
+![](https://renhongl.github.io/images/s2.png)
+
+Dark theme
+
+![](https://renhongl.github.io/images/s1.png)
 
 ## API Reference
 

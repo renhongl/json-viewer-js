@@ -1,6 +1,6 @@
 {
   "name": "json-viewer-js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "One pretty json viewer by javascript",
   "main": "./lib/json-viewer.min.js",
   "homepage": "https://github.com/renhongl/json-viewer-js",

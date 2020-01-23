@@ -92,7 +92,7 @@ JsonViewer.prototype.renderChildren = function(theme, key, val, right, indent, l
 JsonViewer.prototype.parse = function(dataObj, parent, indent, theme) {
     const self = this;
     this.forEach(dataObj, function (val, key) {
-        const { left, right } = self.createItem(indent, theme, parent, key);
+        const { left, right } = self.createItem(indent, theme, parent, key, typeof val !== 'object');
         if (typeof val !== 'object') {
             self.renderRight(theme, right, val);
         } else {
@@ -101,18 +101,30 @@ JsonViewer.prototype.parse = function(dataObj, parent, indent, theme) {
     });
 }
 
-JsonViewer.prototype.createItem = function(indent, theme, parent, key) {
+JsonViewer.prototype.createItem = function(indent, theme, parent, key, basicType) {
     let current = this.createElement('div');
     let left = this.createElement('div');
     let right = this.createElement('div');
+    let wrap = this.createElement('div');
 
     current.style.marginLeft = indent * 2 + 'px';
     left.innerHTML = `${key}<span class="jv-${theme}-symbol">&nbsp;:&nbsp;</span>`;
-    current.appendChild(left);
-    current.appendChild(right);
-    parent.appendChild(current);
-    current.setAttribute('class', theme + 'current');
-    left.setAttribute('class', theme + 'left');
+    if (basicType) {
+        current.appendChild(wrap);
+        wrap.appendChild(left);
+        wrap.appendChild(right);
+        parent.appendChild(current);
+        current.setAttribute('class', theme + 'current');
+        wrap.setAttribute('class', 'jv-wrap');
+        left.setAttribute('class', theme + 'left');
+    } else {
+        current.appendChild(left);
+        current.appendChild(right);
+        parent.appendChild(current);
+        current.setAttribute('class', theme + 'current');
+        left.setAttribute('class', theme + 'left');
+    }
+    
     return {
         left,
         right,

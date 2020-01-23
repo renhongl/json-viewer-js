@@ -12,6 +12,10 @@
     transform: rotate(0deg) !important;
 }
 
+.jv-wrap{
+    display: flex;
+}
+
 /* for light them */
 
 .jv-light-symbol{

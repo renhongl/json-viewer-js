@@ -32,7 +32,7 @@ const testJson = `{
   }
 }`
 
-new JsonViewer({container: document.body, data: testJson, theme: 'light'});
+new JsonViewer({container: document.body, data: testJson, theme: 'light', expand: false});
 
 ```
 
@@ -53,6 +53,7 @@ Name|Type|Desc|Default|Required
 container|DOM Object|DOM element|null|true
 data|String|Json data for render|'{}'|true
 theme|String|Config for different theme(light or dark)|light|false
+expand|Boolean|Config for if expand when loaded|false|false
 
 ## End
 

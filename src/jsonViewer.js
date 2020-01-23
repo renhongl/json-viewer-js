@@ -43,6 +43,7 @@ function JsonViewer(options) {
         theme: 'light',
         container: null,
         data: '{}',
+        expand: false,
     };
     this.options = Object.assign(defaults, options);
     if (isNull(options.container)) {
@@ -67,7 +68,9 @@ JsonViewer.prototype.renderRight = function(theme, right, val) {
 JsonViewer.prototype.renderChildren = function(theme, key, val, right, indent, left) {
     let self = this;
     let folder = this.createElement('span');
-    folder.setAttribute('class', theme + 'folder');
+    let rotate90 = this.options.expand ? 'rotate90' : '';
+    let addHeight = this.options.expand ? 'add-height' : '';
+    folder.setAttribute('class', theme + 'folder ' + rotate90);
     folder.onclick = function (e) {
         let nextSibling = e.target.parentNode.nextSibling;
         self.toggleItem(nextSibling, e.target);
@@ -82,7 +85,7 @@ JsonViewer.prototype.renderChildren = function(theme, key, val, right, indent, l
     }
     left.innerHTML = isObj ? key + '&nbsp;&nbsp{' + len + '}' : key + '&nbsp;&nbsp[' + len + ']';
     left.prepend(folder);
-    right.setAttribute('class', theme + 'rightObj');
+    right.setAttribute('class', theme + 'rightObj ' + addHeight);
     self.parse(val, right, indent + 2.5, theme);
 }
   
@@ -104,7 +107,7 @@ JsonViewer.prototype.createItem = function(indent, theme, parent, key) {
     let right = this.createElement('div');
 
     current.style.marginLeft = indent * 2 + 'px';
-    left.innerHTML = key + '<span class="jv-' + theme + '-symbol">&nbsp;:&nbsp;</span>';
+    left.innerHTML = `${key}<span class="jv-${theme}-symbol">&nbsp;:&nbsp;</span>`;
     current.appendChild(left);
     current.appendChild(right);
     parent.appendChild(current);

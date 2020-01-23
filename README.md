@@ -32,7 +32,12 @@ const testJson = `{
   }
 }`
 
-new JsonViewer({container: document.body, data: testJson, theme: 'light', expand: false});
+new JsonViewer({
+    container: document.body, 
+    data: testJson, 
+    theme: 'light', 
+    expand: false
+});
 
 ```
 
@@ -58,3 +63,5 @@ expand|Boolean|Config for if expand when loaded|false|false
 ## End
 
 If you like it, please give me a star, thanks!
+
+Powered for: [My JSON Editor](https://renhongl.github.io/json-editor)

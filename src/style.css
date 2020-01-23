@@ -16,6 +16,10 @@
     display: flex;
 }
 
+.jv-folder{
+    cursor: pointer;
+}
+
 /* for light them */
 
 .jv-light-symbol{
@@ -79,7 +83,7 @@
     border-top: 8px solid #484d50;
     position: absolute;
     top: 11px;
-    transform-origin: 25% center;
+    transform-origin: 50% 25%;
     transform: rotate(-90deg);
 }
 
@@ -141,7 +145,7 @@
 .jv-dark-folder {
     width: 0px;
     display: inline-block;
-    margin-left: -20px;
+    margin-left: -15px;
     text-align: center;
     cursor: pointer;
     height: 0px;
@@ -150,6 +154,6 @@
     position: absolute;
     top: 11px;
     transform: rotate(-90deg);
-    transform-origin: 25% center;
+    transform-origin: 50% 25%;
 }
 

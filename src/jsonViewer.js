@@ -176,7 +176,7 @@ JsonViewer.prototype.forEach = function (obj, fn) {
             fn.call(null, obj[i], i, obj);
         }
     } else {
-        for (key in obj) {
+        for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
                 fn.call(null, obj[key] || 'null', key, obj);
             }
